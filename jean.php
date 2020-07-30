@@ -59,3 +59,9 @@ function jean_css() {
 }
 
 add_action( 'admin_head', 'jean_css' );
+
+function year_shortcode() {
+  $year = date('Y');
+  return $year;
+}
+add_shortcode('year', 'year_shortcode');
