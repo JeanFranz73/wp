@@ -54,14 +54,40 @@ function jean_css() {
 			padding-right: 0;
 		}
 	}
+	.alignleft.actions p {
+		display: none;
+	}
 	</style>
 	";
 }
 
 add_action( 'admin_head', 'jean_css' );
 
-function year_shortcode() {
-  $year = date('Y');
-  return $year;
+function ano_shortcode() {
+  $ano = date('Y');
+  return $ano;
 }
-add_shortcode('year', 'year_shortcode');
+add_shortcode('ano', 'ano_shortcode');
+
+function cpy_shortcode() {
+	$cpy = '© ' . date('Y') . ' NaturalDente. Todos os direitos reservados.';
+	return $cpy;
+}
+add_shortcode('cpy', 'cpy_shortcode');
+
+  function replace_text($text) {
+	$text = str_replace('são executados automaticamente', 'replace-with-this-string', $text);
+	$text = str_replace('look-for-that-string', 'replace-with-that-string', $text);
+	return $text;
+}
+add_filter('the_content', 'replace_text');
+
+function remove_footer_admin () {
+	echo '<i>Desenvolvido em WordPress por <b>Jean Franz</b>.</i>';
+}
+add_filter('admin_footer_text', 'remove_footer_admin');
+
+function wpbeginner_remove_version() {
+	return '';
+}
+add_filter('the_generator', 'wpbeginner_remove_version');
