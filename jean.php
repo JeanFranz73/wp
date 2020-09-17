@@ -69,15 +69,24 @@ function ano_shortcode() {
 add_shortcode('ano', 'ano_shortcode');
 
 function cpy_shortcode() {
-	$cpy = '© ' . date( 'Y' ) . ' ' . $site_title = get_bloginfo( 'name' ); . '. Todos os direitos reservados.';
+	$cpy = '© ' . date('Y') . ' ' . $site_title = get_bloginfo('name') . '. Todos os direitos reservados.';
 	return $cpy;
 }
-add_shortcode('cpy', 'cpy_sh	ortcode');
+add_shortcode('cpy', 'cpy_shortcode');
 
-function alterar_footer_painel () {
+// Footer do painel
+function remover_footer_admin () {
 	echo '<i>Desenvolvido em WordPress por <b>Jean Franz</b>.</i>';
 }
-add_filter('admin_footer_text', 'alterar_footer_painel');
+add_filter('admin_footer_text', 'remover_footer_admin');
 
-// Ocultar a versão WordPress
-remove_action('wp_head', 'wp_generator');
+// Versão do painel
+//  function remover_footer_versao () {
+//  	echo 'Versão';
+//  }
+//  add_filter('update_footer', 'remover_footer_versao', 9999 );
+
+function wpbeginner_remove_version() {
+	return '';
+}
+add_filter('the_generator', 'wpbeginner_remove_version');
