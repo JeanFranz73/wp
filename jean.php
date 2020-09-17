@@ -8,9 +8,8 @@ Author URI: https://www.facebook.com/JeanFranz.dev
 */
 
 function jean_franz_get_lyric() {
-	$lyrics = "<i>Desenvolvido por <b>Jean Franz</b>.</i>";
-	$lyrics = explode( "\n", $lyrics );
-	return wptexturize( $lyrics[ mt_rand( 0, count( $lyrics ) - 1 ) ] );
+	$mensagem_head = "<i>Desenvolvido por <b>Jean Franz</b>.</i>";
+	return wptexturize( $mensagem_head );
 }
 
 function jean_franz() {
@@ -70,24 +69,15 @@ function ano_shortcode() {
 add_shortcode('ano', 'ano_shortcode');
 
 function cpy_shortcode() {
-	$cpy = '© ' . date('Y') . ' NaturalDente. Todos os direitos reservados.';
+	$cpy = '© ' . date( 'Y' ) . ' ' . $site_title = get_bloginfo( 'name' ); . '. Todos os direitos reservados.';
 	return $cpy;
 }
-add_shortcode('cpy', 'cpy_shortcode');
+add_shortcode('cpy', 'cpy_sh	ortcode');
 
-  function replace_text($text) {
-	$text = str_replace('são executados automaticamente', 'replace-with-this-string', $text);
-	$text = str_replace('look-for-that-string', 'replace-with-that-string', $text);
-	return $text;
-}
-add_filter('the_content', 'replace_text');
-
-function remove_footer_admin () {
+function alterar_footer_painel () {
 	echo '<i>Desenvolvido em WordPress por <b>Jean Franz</b>.</i>';
 }
-add_filter('admin_footer_text', 'remove_footer_admin');
+add_filter('admin_footer_text', 'alterar_footer_painel');
 
-function wpbeginner_remove_version() {
-	return '';
-}
-add_filter('the_generator', 'wpbeginner_remove_version');
+// Ocultar a versão WordPress
+remove_action('wp_head', 'wp_generator');
